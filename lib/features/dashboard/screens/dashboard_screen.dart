@@ -196,7 +196,7 @@ class _AttendanceStatusCard extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: hasCheckedIn ? AppColors.presentGreen.withOpacity(0.12) : AppColors.absentRed.withOpacity(0.12),
+              color: hasCheckedIn ? AppColors.presentGreen.withValues(alpha: 0.12) : AppColors.absentRed.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Icon(
@@ -250,9 +250,9 @@ class _QuickActionCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 18),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: color.withOpacity(0.2)),
+          border: Border.all(color: color.withValues(alpha: 0.2)),
         ),
         child: Column(
           children: [

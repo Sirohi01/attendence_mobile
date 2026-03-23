@@ -61,11 +61,13 @@ class _TaskListScreenState extends ConsumerState<TaskListScreen> {
           error: (e, _) => Center(child: Text('Error: $e')),
           data: (tasks) {
             final filtered = _filter == 'all' ? tasks : tasks.where((t) => t.status == _filter).toList();
-            if (filtered.isEmpty) return Center(child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              const Icon(Icons.task_outlined, size: 60, color: AppColors.textHint),
-              const SizedBox(height: 12),
-              Text('No ${_filter} tasks', style: const TextStyle(color: AppColors.textSecondary)),
-            ]));
+            if (filtered.isEmpty) {
+              return Center(child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                const Icon(Icons.task_outlined, size: 60, color: AppColors.textHint),
+                const SizedBox(height: 12),
+                Text('No $_filter tasks', style: const TextStyle(color: AppColors.textSecondary)),
+              ]));
+            }
             return RefreshIndicator(
               onRefresh: () => ref.read(myTasksProvider.notifier).loadTasks(),
               child: ListView.builder(
@@ -112,7 +114,7 @@ class _TaskCard extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: AppColors.surface, borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: task.isOverdue ? AppColors.error.withOpacity(0.3) : AppColors.divider),
+          border: Border.all(color: task.isOverdue ? AppColors.error.withValues(alpha: 0.3) : AppColors.divider),
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(children: [
@@ -121,7 +123,7 @@ class _TaskCard extends ConsumerWidget {
             Expanded(child: Text(task.title, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15, color: AppColors.textPrimary), maxLines: 1, overflow: TextOverflow.ellipsis)),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: BoxDecoration(color: _statusColor.withOpacity(0.12), borderRadius: BorderRadius.circular(6)),
+              decoration: BoxDecoration(color: _statusColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(6)),
               child: Text(task.status.replaceAll('_', ' ').toUpperCase(), style: TextStyle(color: _statusColor, fontSize: 10, fontWeight: FontWeight.w700)),
             ),
           ]),

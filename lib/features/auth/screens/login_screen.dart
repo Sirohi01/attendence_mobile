@@ -76,7 +76,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         width: 60,
                         height: 60,
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.white.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(18),
                         ),
                         child: const Icon(Icons.water, size: 34, color: Colors.white),
@@ -84,7 +84,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       const SizedBox(height: 24),
                       const Text('Welcome Back 👋', style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w800)),
                       const SizedBox(height: 6),
-                      Text('Sign in to continue', style: TextStyle(color: Colors.white.withOpacity(0.85), fontSize: 16)),
+                      Text('Sign in to continue', style: TextStyle(color: Colors.white.withValues(alpha: 0.85), fontSize: 16)),
                     ],
                   ),
                 ),
@@ -152,7 +152,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 : const Text('Sign In'),
                           ),
                           const Spacer(),
-                          Center(
+                          const Center(
                             child: Text(
                               'Namo Ganga Workforce Management System\nv1.0.0',
                               textAlign: TextAlign.center,

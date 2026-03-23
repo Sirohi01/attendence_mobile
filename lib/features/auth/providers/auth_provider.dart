@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -88,22 +89,22 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   Future<String?> login(String email, String password) async {
     try {
-      print('🔐 Starting login for: $email');
+      debugPrint('🔐 Starting login for: $email');
       state = const AuthLoading();
       final deviceId = await _getDeviceId();
-      print('📱 Device ID: $deviceId');
+      debugPrint('📱 Device ID: $deviceId');
 
       final response = await _api.post(
         '/auth/login',
         data: {'email': email, 'password': password},
       );
 
-      print('✅ Login API response received');
+      debugPrint('✅ Login API response received');
       final data = response.data['data'];
-      print('📄 Response data keys: ${data.keys}');
+      debugPrint('📄 Response data keys: ${data.keys}');
       
       final user = UserModel.fromJson(data['user']);
-      print('👤 User parsed: ${user.fullName} (${user.role})');
+      debugPrint('👤 User parsed: ${user.fullName} (${user.role})');
 
       await Future.wait([
         _storage.write(key: AppConstants.accessTokenKey, value: data['accessToken']),
@@ -112,12 +113,12 @@ class AuthNotifier extends StateNotifier<AuthState> {
         _storage.write(key: AppConstants.deviceIdKey, value: deviceId),
       ]);
 
-      print('💾 Tokens and user data saved');
+      debugPrint('💾 Tokens and user data saved');
       state = AuthAuthenticated(user);
-      print('🎉 Auth state set to authenticated');
+      debugPrint('🎉 Auth state set to authenticated');
       return null; // success
     } catch (e) {
-      print('❌ Login error: $e');
+      debugPrint('❌ Login error: $e');
       state = const AuthUnauthenticated();
       if (e is Exception) {
         return e.toString().replaceAll('Exception: ', '');

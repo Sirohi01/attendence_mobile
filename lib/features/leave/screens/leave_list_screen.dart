@@ -56,11 +56,13 @@ class _LeaveListScreenState extends ConsumerState<LeaveListScreen> with SingleTi
             controller: _tabCtrl,
             children: _tabs.map((tab) {
               final filtered = tab == 'All' ? leaves : leaves.where((l) => l.status == tab.toLowerCase()).toList();
-              if (filtered.isEmpty) return Center(child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Icon(Icons.event_note_outlined, size: 60, color: AppColors.textHint),
-                const SizedBox(height: 12),
-                Text('No ${tab.toLowerCase()} leaves', style: const TextStyle(color: AppColors.textSecondary)),
-              ]));
+              if (filtered.isEmpty) {
+                return Center(child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  const Icon(Icons.event_note_outlined, size: 60, color: AppColors.textHint),
+                  const SizedBox(height: 12),
+                  Text('No ${tab.toLowerCase()} leaves', style: const TextStyle(color: AppColors.textSecondary)),
+                ]));
+              }
               return RefreshIndicator(
                 onRefresh: () => ref.read(leaveListProvider.notifier).loadLeaves(),
                 child: ListView.builder(
@@ -111,7 +113,7 @@ class _LeaveCard extends StatelessWidget {
           const Spacer(),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            decoration: BoxDecoration(color: _statusColor.withOpacity(0.12), borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(color: _statusColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(8)),
             child: Text(leave.status.toUpperCase(),
                 style: TextStyle(color: _statusColor, fontSize: 11, fontWeight: FontWeight.w700)),
           ),

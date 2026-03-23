@@ -205,9 +205,9 @@ class _SummaryCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.2)),
+        border: Border.all(color: color.withValues(alpha: 0.2)),
       ),
       child: Column(
         children: [
@@ -289,7 +289,7 @@ class _SalaryCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: _statusColor.withOpacity(0.1),
+                    color: _statusColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
@@ -340,7 +340,7 @@ class _SalaryCard extends StatelessWidget {
                     if (salary.paidAt != null)
                       Text(
                         'Paid ${DateFormat('MMM d').format(salary.paidAt!)}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: AppColors.success,
                           fontSize: 11,
                           fontWeight: FontWeight.w600,

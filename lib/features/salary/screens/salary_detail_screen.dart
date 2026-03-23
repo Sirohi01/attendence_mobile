@@ -18,7 +18,6 @@ class SalaryDetailScreen extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.download),
               onPressed: () {
-                // TODO: Implement download salary slip
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Download feature coming soon')),
                 );
@@ -90,9 +89,9 @@ class SalaryDetailScreen extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: statusColor.withOpacity(0.1),
+        color: statusColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: statusColor.withOpacity(0.3)),
+        border: Border.all(color: statusColor.withValues(alpha: 0.3)),
       ),
       child: Column(
         children: [
@@ -185,7 +184,7 @@ class SalaryDetailScreen extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppColors.primary, AppColors.primary.withOpacity(0.8)],
+          colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.8)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),

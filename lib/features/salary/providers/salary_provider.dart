@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/network/api_client.dart';
 import '../models/salary_model.dart';
@@ -24,8 +25,8 @@ class MySalariesNotifier extends StateNotifier<AsyncValue<List<SalaryModel>>> {
           try {
             return SalaryModel.fromJson(e as Map<String, dynamic>);
           } catch (error) {
-            print('Error parsing salary: $error');
-            print('Salary data: $e');
+            debugPrint('Error parsing salary: $error');
+            debugPrint('Salary data: $e');
             rethrow;
           }
         }).toList();
@@ -35,7 +36,7 @@ class MySalariesNotifier extends StateNotifier<AsyncValue<List<SalaryModel>>> {
       
       state = AsyncData(salaries);
     } catch (e) {
-      print('Error loading salaries: $e');
+      debugPrint('Error loading salaries: $e');
       state = AsyncError(e, StackTrace.current);
     }
   }
@@ -49,7 +50,7 @@ class MySalariesNotifier extends StateNotifier<AsyncValue<List<SalaryModel>>> {
       
       return SalaryModel.fromJson(res.data['data']);
     } catch (e) {
-      print('Error loading salary slip: $e');
+      debugPrint('Error loading salary slip: $e');
       return null;
     }
   }

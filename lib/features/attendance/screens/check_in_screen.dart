@@ -144,8 +144,8 @@ class _CheckInScreenState extends ConsumerState<CheckInScreen> {
           else
             Container(
               padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(color: AppColors.success.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(16), border: Border.all(color: AppColors.success.withOpacity(0.3))),
+              decoration: BoxDecoration(color: AppColors.success.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(16), border: Border.all(color: AppColors.success.withValues(alpha: 0.3))),
               child: const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Icon(Icons.check_circle, color: AppColors.success),
                 SizedBox(width: 10),
@@ -164,7 +164,7 @@ class _CheckInScreenState extends ConsumerState<CheckInScreen> {
       child: Row(children: [
         Container(width: 48, height: 48,
           decoration: BoxDecoration(
-            color: _inGeofence ? AppColors.success.withOpacity(0.12) : AppColors.warning.withOpacity(0.12),
+            color: _inGeofence ? AppColors.success.withValues(alpha: 0.12) : AppColors.warning.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(14)),
           child: Icon(_locating ? Icons.gps_not_fixed : (_inGeofence ? Icons.location_on : Icons.location_off),
               color: _locating ? AppColors.textSecondary : (_inGeofence ? AppColors.success : AppColors.warning), size: 26)),
@@ -228,7 +228,7 @@ class _TimeChip extends StatelessWidget {
     String display = extra ?? (time != null ? '${time!.hour.toString().padLeft(2,'0')}:${time!.minute.toString().padLeft(2,'0')}' : '--:--');
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-      decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(10)),
+      decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(10)),
       child: Column(children: [
         Text(label, style: const TextStyle(color: Colors.white60, fontSize: 10, fontWeight: FontWeight.w600)),
         const SizedBox(height: 2),
@@ -257,12 +257,12 @@ class _SelfieCard extends StatelessWidget {
         child: selfie != null
             ? ClipRRect(borderRadius: BorderRadius.circular(15),
                 child: Image.file(selfie!, fit: BoxFit.cover))
-            : Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            : const Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Icon(Icons.camera_alt_outlined, size: 42, color: AppColors.textHint),
-                const SizedBox(height: 10),
-                const Text('Tap to take selfie', style: TextStyle(color: AppColors.textSecondary, fontSize: 14, fontWeight: FontWeight.w500)),
-                const SizedBox(height: 4),
-                const Text('Required for attendance', style: TextStyle(color: AppColors.textHint, fontSize: 12)),
+                SizedBox(height: 10),
+                Text('Tap to take selfie', style: TextStyle(color: AppColors.textSecondary, fontSize: 14, fontWeight: FontWeight.w500)),
+                SizedBox(height: 4),
+                Text('Required for attendance', style: TextStyle(color: AppColors.textHint, fontSize: 12)),
               ]),
       ),
     );

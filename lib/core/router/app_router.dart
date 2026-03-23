@@ -32,21 +32,21 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       final isOnSplash = state.matchedLocation == AppConstants.splashRoute;
       final isOnLogin = state.matchedLocation == AppConstants.loginRoute;
 
-      print('🧭 Router redirect - isLoggedIn: $isLoggedIn, isLoading: $isLoading, location: ${state.matchedLocation}');
+      debugPrint('🧭 Router redirect - isLoggedIn: $isLoggedIn, isLoading: $isLoading, location: ${state.matchedLocation}');
 
       if (isLoading) {
-        print('⏳ Still loading, staying on splash');
+        debugPrint('⏳ Still loading, staying on splash');
         return isOnSplash ? null : AppConstants.splashRoute;
       }
       if (!isLoggedIn && !isOnLogin) {
-        print('🔒 Not logged in, redirecting to login');
+        debugPrint('🔒 Not logged in, redirecting to login');
         return AppConstants.loginRoute;
       }
       if (isLoggedIn && (isOnLogin || isOnSplash)) {
-        print('✅ Logged in, redirecting to dashboard');
+        debugPrint('✅ Logged in, redirecting to dashboard');
         return AppConstants.dashboardRoute;
       }
-      print('➡️ No redirect needed');
+      debugPrint('➡️ No redirect needed');
       return null;
     },
     routes: [

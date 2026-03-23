@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/network/api_client.dart';
 import '../models/task_model.dart';
@@ -22,15 +23,15 @@ class MyTasksNotifier extends StateNotifier<AsyncValue<List<TaskModel>>> {
         try {
           return TaskModel.fromJson(e as Map<String, dynamic>);
         } catch (error) {
-          print('Error parsing task: $error');
-          print('Task data: $e');
+          debugPrint('Error parsing task: $error');
+          debugPrint('Task data: $e');
           rethrow;
         }
       }).toList();
       
       state = AsyncData(tasks);
     } catch (e) { 
-      print('Error loading tasks: $e');
+      debugPrint('Error loading tasks: $e');
       state = AsyncError(e, StackTrace.current); 
     }
   }

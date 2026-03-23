@@ -40,7 +40,7 @@ class _TaskDetailScreenState extends ConsumerState<TaskDetailScreen> {
         Wrap(spacing: 8, children: [
           _Chip(t.priority.toUpperCase(), color: AppColors.warning),
           _Chip(t.status.replaceAll('_', ' ').toUpperCase(), color: AppColors.primary),
-          if (t.isOverdue) _Chip('OVERDUE', color: AppColors.error),
+          if (t.isOverdue) const _Chip('OVERDUE', color: AppColors.error),
         ]),
         const SizedBox(height: 16),
         if (t.description != null) ...[
@@ -91,7 +91,7 @@ class _Chip extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-    decoration: BoxDecoration(color: color.withOpacity(0.12), borderRadius: BorderRadius.circular(8)),
+    decoration: BoxDecoration(color: color.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(8)),
     child: Text(label, style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.w700)),
   );
 }
